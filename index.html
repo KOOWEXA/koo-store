@@ -1,1643 +1,278 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>KOO-APP - Plataforma</title>
-    <meta name="description" content="KOO-APP: Adquiere servicios desde tu móvil de forma segura y sencilla">
-    
-    <meta name="theme-color" content="#0F1C3F">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22KOO-APP%22%2C%22short_name%22%3A%22KOO%22%2C%22description%22%3A%22Plataforma%20de%20servicios%20m%C3%B3viles%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230F1C3F%22%2C%22theme_color%22%3A%22%230052CC%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ccircle%20cx%3D'50'%20cy%3D'50'%20r%3D'45'%20fill%3D'%230052CC'%2F%3E%3Ctext%20x%3D'50'%20y%3D'68'%20font-size%3D'50'%20text-anchor%3D'middle'%20fill%3D'%23FFFFFF'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%3EK%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22100x100%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230052CC'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23FFFFFF' font-family='Arial, sans-serif' font-weight='bold'>K</text></svg>">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        :root {
-            --primary: #0F1C3F;
-            --secondary: #0052CC;
-            --accent: #FF6B35;
-            --success: #28A745;
-            --error: #DC3545;
-            --warning: #FFC107;
-            --info: #17A2B8;
-            --bg-primary: #FFFFFF;
-            --bg-secondary: #F8F9FA;
-            --bg-tertiary: #E9ECEF;
-            --bg-card: #FFFFFF;
-            --bg-modal: rgba(0, 0, 0, 0.7);
-            --text-primary: #212529;
-            --text-secondary: #495057;
-            --text-muted: #6C757D;
-            --text-inverse: #FFFFFF;
-            --border-color: #DEE2E6;
-            --border-radius: 8px;
-            --border-radius-lg: 12px;
-            --border-radius-sm: 4px;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.1);
-            --space-xs: 0.5rem;
-            --space-sm: 0.75rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-xxl: 3rem;
-            --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            --font-size-xs: 0.75rem;
-            --font-size-sm: 0.875rem;
-            --font-size-md: 1rem;
-            --font-size-lg: 1.125rem;
-            --font-size-xl: 1.25rem;
-            --font-size-xxl: 1.5rem;
-            --font-size-xxxl: 2rem;
-            --container-width: 1200px;
-            --header-height: 70px;
-            --z-fixed: 1030;
-            --z-modal: 1050;
-        }
-
-        html {
-            font-size: 16px;
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: var(--space-md);
-            color: var(--text-primary);
-        }
-
-        h1 {
-            font-size: var(--font-size-xxxl);
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: 2rem;
-        }
-
-        h3 {
-            font-size: 1.75rem;
-        }
-
-        h4 {
-            font-size: var(--font-size-xxl);
-        }
-
-        h5 {
-            font-size: var(--font-size-xl);
-        }
-
-        h6 {
-            font-size: var(--font-size-lg);
-        }
-
-        p {
-            margin-bottom: var(--space-md);
-            line-height: 1.7;
-        }
-
-        a {
-            color: var(--secondary);
-            text-decoration: none;
-        }
-
-        .container {
-            width: 100%;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 var(--space-lg);
-        }
-
-        .section {
-            padding: var(--space-xxl) 0;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-title .subtitle {
-            color: var(--text-muted);
-            font-size: var(--font-size-lg);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        #main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow);
-            z-index: var(--z-fixed);
-            height: var(--header-height);
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-            padding: 0 var(--space-md);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .logo {
-            width: 40px;
-            height: 40px;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--secondary);
-        }
-
-        .logo img, .logo svg {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 4px;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .logo-text span {
-            color: var(--secondary);
-        }
-
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 44px;
-            height: 44px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: var(--space-lg);
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-primary);
-            font-weight: 500;
-            padding: var(--space-sm) var(--space-md);
-            border-radius: var(--border-radius);
-            position: relative;
-        }
-
-        .nav-link:hover, .nav-link:focus-visible {
-            color: var(--secondary);
-            background-color: var(--bg-secondary);
-            outline: none;
-        }
-
-        .nav-link.active {
-            color: var(--secondary);
-            background-color: var(--bg-secondary);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: var(--space-md);
-            right: var(--space-md);
-            height: 2px;
-            background: var(--secondary);
-            border-radius: 1px;
-        }
-
-        .btn-contact {
-            background: var(--secondary);
-            color: var(--text-inverse) !important;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .hero {
-            padding: calc(var(--header-height) + var(--space-xxl)) 0 var(--space-xxl);
-            background: linear-gradient(135deg, #0F1C3F 0%, #1E3A8A 50%, #3B82F6 100%);
-            color: var(--text-inverse);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero h2 {
-            color: var(--text-inverse);
-            font-size: 2.5rem;
-            margin-bottom: var(--space-lg);
-            position: relative;
-        }
-
-        .hero .lead {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: var(--space-xl);
-            max-width: 600px;
-            position: relative;
-            opacity: 0.95;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: var(--space-xl);
-            margin: var(--space-xl) 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .stat {
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: var(--space-lg);
-            border-radius: var(--border-radius);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-inverse);
-            margin-bottom: var(--space-xs);
-            font-family: var(--font-heading);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--space-md);
-            margin-top: var(--space-xl);
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-sm);
-            padding: 0.875rem 1.75rem;
-            background: var(--secondary);
-            color: var(--text-inverse);
-            border: none;
-            border-radius: var(--border-radius);
-            font-family: var(--font-primary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            min-height: 44px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            line-height: 1;
-        }
-
-        .btn:hover, .btn:focus-visible {
-            background: linear-gradient(135deg, var(--secondary) 0%, #0066FF 100%);
-            box-shadow: var(--shadow-lg);
-            outline: none;
-        }
-
-        .btn-large {
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            min-height: 52px;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            min-height: 36px;
-        }
-
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-
-        .btn-accent {
-            background: var(--accent);
-        }
-
-        .btn-disabled, .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        .info-grid, .projects-grid {
-            display: grid;
-            gap: var(--space-lg);
-            margin-bottom: var(--space-xl);
-        }
-
-        .info-card, .project-card {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-icon, .project-icon {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-        }
-
-        .info-card h4, .project-card h4 {
-            margin-bottom: var(--space-md);
-            color: var(--text-primary);
-        }
-
-        .info-card p, .project-card p {
-            color: var(--text-secondary);
-            flex-grow: 1;
-        }
-
-        .project-card .btn-small {
-            margin-top: auto;
-            align-self: flex-start;
-        }
-
-        .testimonial-section {
-            background: var(--bg-secondary);
-        }
-
-        .testimonials {
-            display: grid;
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
-        .testimonial {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .testimonial-content {
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: var(--space-lg);
-            position: relative;
-            padding-left: var(--space-lg);
-        }
-
-        .testimonial-content::before {
-            content: '"';
-            position: absolute;
-            left: 0;
-            top: -10px;
-            font-size: 3rem;
-            color: var(--secondary);
-            opacity: 0.3;
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-author {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
-            padding-top: var(--space-md);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .testimonial-author strong {
-            color: var(--text-primary);
-            font-size: var(--font-size-lg);
-        }
-
-        .testimonial-author span {
-            color: var(--text-muted);
-            font-size: var(--font-size-sm);
-        }
-
-        .free-plan-section, .paid-plans-section {
-            margin-bottom: var(--space-xxl);
-        }
-
-        .free-plan-content {
-            display: grid;
-            gap: var(--space-xl);
-            margin-top: var(--space-xl);
-        }
-
-        .free-plan-details {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--border-radius-lg);
-            box-shadow: var(--shadow);
-        }
-
-        .free-plan-features {
-            list-style: none;
-            margin: var(--space-lg) 0;
-        }
-
-        .free-plan-features li {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-sm);
-            color: var(--text-secondary);
-        }
-
-        .free-plan-conditions {
-            margin: var(--space-xl) 0;
-            padding: var(--space-lg);
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-        }
-
-        .conditions-list {
-            display: grid;
-            gap: var(--space-sm);
-            margin: var(--space-md) 0;
-        }
-
-        .condition-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm);
-            background: var(--bg-card);
-            border-radius: var(--border-radius-sm);
-        }
-
-        .terms-acceptance {
-            margin-top: var(--space-lg);
-            padding: var(--space-md);
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .free-plan-benefits {
-            display: grid;
-            gap: var(--space-md);
-        }
-
-        .benefit-card {
-            background: var(--bg-card);
-            padding: var(--space-lg);
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        .benefit-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: var(--space-sm);
-        }
-
-        .selection-progress {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: var(--space-xl) 0;
-            position: relative;
-        }
-
-        .selection-progress::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: var(--border-color);
-            z-index: 0;
-        }
-
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            flex: 1;
-        }
-
-        .progress-circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--bg-tertiary);
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: var(--space-xs);
-        }
-
-        .progress-circle.active {
-            background: var(--secondary);
-            color: var(--text-inverse);
-        }
-
-        .progress-circle.completed {
-            background: var(--success);
-            color: var(--text-inverse);
-        }
-
-        .progress-label {
-            font-size: var(--font-size-sm);
-            color: var(--text-muted);
-            text-align: center;
-        }
-
-        .progress-label.active {
-            color: var(--secondary);
-            font-weight: 500;
-        }
-
-        .selection-phase {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--border-radius-lg);
-            margin: var(--space-xl) 0;
-            box-shadow: var(--shadow);
-        }
-
-        .plan-options {
-            display: grid;
-            gap: var(--space-lg);
-            margin-top: var(--space-xl);
-        }
-
-        .plan-option {
-            background: var(--bg-secondary);
-            padding: var(--space-lg);
-            border-radius: var(--border-radius);
-            border: 2px solid transparent;
-        }
-
-        .plan-option.selected {
-            border-color: var(--secondary);
-            background: rgba(0, 82, 204, 0.05);
-        }
-
-        .plan-option h5 {
-            margin-bottom: var(--space-sm);
-            color: var(--text-primary);
-        }
-
-        .plan-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary);
-            margin: var(--space-md) 0;
-        }
-
-        .plan-option ul {
-            list-style: none;
-            margin: var(--space-md) 0;
-        }
-
-        .plan-option li {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-xs);
-            color: var(--text-secondary);
-        }
-
-        .summary-container {
-            background: var(--bg-card);
-            padding: var(--space-xl);
-            border-radius: var(--border-radius-lg);
-            margin-top: var(--space-xl);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .summary-details {
-            display: grid;
-            gap: var(--space-md);
-            margin: var(--space-lg) 0;
-            padding: var(--space-lg);
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-        }
-
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: var(--space-sm);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-item.total {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--primary);
-            padding-top: var(--space-md);
-            border-top: 2px solid var(--secondary);
-        }
-
-        .confirmation-section {
-            margin-top: var(--space-xl);
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--border-color);
-        }
-
-        .confirmation-checkbox {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            margin-bottom: var(--space-lg);
-        }
-
-        .summary-actions {
-            display: flex;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        footer {
-            background: #0F1C3F;
-            color: var(--text-inverse);
-            padding-top: var(--space-xxl);
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: grid;
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-        }
-
-        .footer-about {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-logo-text {
-            font-size: 1.75rem;
-            color: var(--text-inverse);
-        }
-
-        .footer-logo-text span {
-            color: #4DABF7;
-        }
-
-        .footer-description {
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.6;
-        }
-
-        .social-links {
-            display: flex;
-            gap: var(--space-sm);
-            flex-wrap: wrap;
-            margin-top: var(--space-md);
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--text-inverse);
-        }
-
-        .social-link:hover, .social-link:focus-visible {
-            background: var(--secondary);
-            outline: none;
-        }
-
-        .footer-links h4, .footer-contact h4, .footer-projects h4 {
-            color: var(--text-inverse);
-            margin-bottom: var(--space-lg);
-            font-size: var(--font-size-lg);
-        }
-
-        .footer-links ul, .footer-contact ul {
-            list-style: none;
-        }
-
-        .footer-links li, .footer-contact li {
-            margin-bottom: var(--space-sm);
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.85);
-            display: block;
-            padding: var(--space-xs) 0;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-inverse);
-            padding-left: var(--space-xs);
-        }
-
-        .footer-contact li {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
-            line-height: 1.5;
-        }
-
-        .footer-contact i {
-            margin-top: 2px;
-            color: rgba(255, 255, 255, 0.7);
-            min-width: 20px;
-            text-align: center;
-        }
-
-        .footer-projects {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-lg);
-        }
-
-        .project-links {
-            display: grid;
-            gap: var(--space-sm);
-        }
-
-        .project-links a {
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            color: rgba(255, 255, 255, 0.85);
-            padding: var(--space-sm);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius);
-        }
-
-        .project-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-inverse);
-        }
-
-        .project-links i {
-            width: 20px;
-            text-align: center;
-            color: var(--secondary);
-        }
-
-        .footer-app {
-            background: rgba(255, 255, 255, 0.05);
-            padding: var(--space-lg);
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .app-download {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-sm);
-            background: var(--secondary);
-            color: var(--text-inverse);
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            margin-top: var(--space-sm);
-        }
-
-        .app-download:hover {
-            background: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding: var(--space-lg) 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.85);
-            font-size: var(--font-size-sm);
-        }
-
-        .footer-legal {
-            margin-top: var(--space-md);
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        .footer-legal a {
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .footer-legal a:hover {
-            color: var(--text-inverse);
-            text-decoration: underline;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-modal);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: var(--z-modal);
-            padding: var(--space-md);
-            backdrop-filter: blur(4px);
-        }
-
-        .modal-container {
-            background: var(--bg-card);
-            border-radius: var(--border-radius-lg);
-            max-width: 500px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .modal-content {
-            padding: var(--space-xl);
-        }
-
-        .modal-icon {
-            font-size: 3rem;
-            color: var(--secondary);
-            text-align: center;
-            margin-bottom: var(--space-lg);
-        }
-
-        .modal-title {
-            text-align: center;
-            margin-bottom: var(--space-lg);
-            color: var(--text-primary);
-        }
-
-        .modal-body {
-            margin-bottom: var(--space-xl);
-            line-height: 1.7;
-            color: var(--text-secondary);
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-        }
-
-        .loading-spinner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-modal);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: var(--z-modal);
-            color: var(--text-inverse);
-            backdrop-filter: blur(8px);
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: var(--secondary);
-            margin-bottom: var(--space-lg);
-        }
-
-        .floating-tools {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-            z-index: var(--z-fixed);
-        }
-
-        .tool-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--secondary);
-            color: var(--text-inverse);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .tool-btn:hover {
-            background: var(--accent);
-        }
-
-        .notification {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            transform: translateX(120%);
-            opacity: 0;
-            max-width: 400px;
-            border-left: 4px solid var(--info);
-            pointer-events: auto;
-            margin-bottom: var(--space-sm);
-        }
-
-        .notification-success {
-            border-left-color: var(--success);
-        }
-
-        .notification-error {
-            border-left-color: var(--error);
-        }
-
-        .notification-warning {
-            border-left-color: var(--warning);
-        }
-
-        .notification-info {
-            border-left-color: var(--info);
-        }
-
-        @media (min-width: 640px) {
-            .info-grid, .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-
-        @media (min-width: 768px) {
-            .testimonials {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-            
-            .plan-options {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-            
-            .free-plan-content {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            :root {
-                --header-height: 60px;
-                --space-xl: 1.5rem;
-                --space-xxl: 2rem;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                background: var(--bg-card);
-                flex-direction: column;
-                padding: var(--space-md);
-                box-shadow: var(--shadow-lg);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                z-index: 1000;
-                max-height: calc(100vh - var(--header-height));
-                overflow-y: auto;
-            }
-            
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-            visibility: visible;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .hero-actions {
-                flex-direction: column;
-            }
-            
-            .hero-actions .btn {
-                width: 100%;
-            }
-            
-            .floating-tools {
-                bottom: 15px;
-                right: 15px;
-            }
-            
-            .tool-btn {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .free-plan-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .summary-actions {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.75rem;
-            }
-            
-            h2 {
-                font-size: 1.5rem;
-            }
-            
-            h3 {
-                font-size: 1.25rem;
-            }
-            
-            .container {
-                padding: 0 var(--space-md);
-            }
-            
-            .section {
-                padding: var(--space-xl) 0;
-            }
-            
-            .btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            
-            .modal-container {
-                margin: var(--space-md);
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .plan-options {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        img {
-            draggable: false;
-            -webkit-user-drag: none;
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>KOO-APP - Website</title>
+<meta name="description" content="KOO-APP: Adquiere servicios desde tu móvil de forma segura y sencilla">
+<meta name="theme-color" content="#0F1C3F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22KOO-APP%22%2C%22short_name%22%3A%22KOO%22%2C%22description%22%3A%22Plataforma%20de%20servicios%20m%C3%B3viles%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230F1C3F%22%2C%22theme_color%22%3A%22%230052CC%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ccircle%20cx%3D'50'%20cy%3D'50'%20r%3D'45'%20fill%3D'%230052CC'%2F%3E%3Ctext%20x%3D'50'%20y%3D'68'%20font-size%3D'50'%20text-anchor%3D'middle'%20fill%3D'%23FFFFFF'%20font-family%3D'Arial%2C%20sans-serif'%20font-weight%3D'bold'%3EK%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22100x100%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%230052CC'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='%23FFFFFF' font-family='Arial, sans-serif' font-weight='bold'>K</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;line-height:1.6;color:#212529;background-color:#FFFFFF;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%;height:auto;display:block}
+button,input,textarea,select{font:inherit;border:none;background:none}
+a{text-decoration:none;color:inherit}
+ul,ol{list-style:none}
+:root{--primary:#000000;--secondary:#0052CC;--accent:#FF6B35;--bg-primary:#FFFFFF;--bg-secondary:#F0F0F0;--bg-card:#FFFFFF;--bg-modal:rgba(0,0,0,0.85);--text-primary:#000000;--text-secondary:#222222;--text-inverse:#FFFFFF;--border:#CCCCCC;--font-primary:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;--font-heading:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;--space-xs:0.5rem;--space-sm:0.75rem;--space-md:1rem;--space-lg:1.5rem;--space-xl:2rem;--space-xxl:3rem;--container-max:1200px;--header-height:70px;--border-radius:8px;--border-radius-lg:12px;--shadow:0 4px 8px rgba(0,0,0,0.15);--shadow-md:0 8px 16px rgba(0,0,0,0.2);--shadow-lg:0 16px 32px rgba(0,0,0,0.25);--z-fixed:1030;--z-modal:1050}
+::selection{background-color:var(--secondary);color:var(--text-inverse)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.container{width:100%;max-width:var(--container-max);margin:0 auto;padding:0 var(--space-lg)}
+.section{padding:var(--space-xxl) 0;position:relative}
+.section-title{text-align:center;margin-bottom:var(--space-xl)}
+.section-title .subtitle{color:var(--text-secondary);font-size:1.125rem;max-width:600px;margin:0 auto;font-weight:600}
+#main-header{position:fixed;top:0;left:0;width:100%;background-color:var(--bg-primary);box-shadow:var(--shadow);z-index:var(--z-fixed);height:var(--header-height);border-bottom:2px solid var(--secondary)}
+.navbar{display:flex;justify-content:space-between;align-items:center;height:100%;padding:0 var(--space-md)}
+.logo-container{display:flex;align-items:center;gap:var(--space-md)}
+.logo{width:40px;height:40px;border-radius:var(--border-radius);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--secondary)}
+.logo-text{font-size:1.5rem;font-weight:900;color:var(--text-primary)}
+.logo-text span{color:var(--secondary)}
+.nav-menu{display:flex;gap:var(--space-lg);list-style:none}
+.nav-link{color:var(--text-primary);font-weight:700;padding:var(--space-sm) var(--space-md);border-radius:var(--border-radius);position:relative;transition:all 0.3s ease}
+.nav-link:hover,.nav-link:focus-visible{color:var(--secondary);background-color:var(--bg-secondary)}
+.nav-link.active{color:var(--secondary);background-color:var(--bg-secondary)}
+.nav-link.active::after{content:'';position:absolute;bottom:-2px;left:var(--space-md);right:var(--space-md);height:3px;background:var(--secondary);border-radius:1px}
+.hamburger{display:none;background:none;border:none;color:var(--text-primary);font-size:1.5rem;cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center;border-radius:var(--border-radius)}
+.hamburger:hover,.hamburger:focus-visible{background-color:var(--bg-secondary)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-sm);padding:1rem 2rem;background:var(--secondary);color:var(--text-inverse);border:2px solid transparent;border-radius:var(--border-radius);font-family:var(--font-primary);font-weight:800;font-size:1rem;cursor:pointer;min-height:50px;position:relative;overflow:hidden;text-align:center;line-height:1;transition:all 0.3s ease}
+.btn:hover,.btn:focus-visible{background:var(--primary);color:var(--text-inverse);border-color:var(--secondary);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.btn-large{padding:1.25rem 2.5rem;font-size:1.125rem;min-height:60px}
+.btn-small{padding:0.75rem 1.5rem;font-size:0.875rem;min-height:42px}
+.btn-secondary{background:var(--bg-secondary);color:var(--text-primary);border-color:var(--border)}
+.btn-accent{background:var(--accent);color:var(--text-inverse)}
+.btn:disabled{opacity:0.5;cursor:not-allowed;pointer-events:none}
+.hero{padding:calc(var(--header-height) + var(--space-xxl)) 0 var(--space-xxl);background:linear-gradient(135deg,var(--primary) 0%,var(--secondary) 100%);color:var(--text-inverse);position:relative;overflow:hidden}
+.hero h2{color:var(--text-inverse);font-size:3rem;margin-bottom:var(--space-lg);text-shadow:2px 2px 4px rgba(0,0,0,0.5)}
+.hero .lead{font-size:1.25rem;line-height:1.8;margin-bottom:var(--space-xl);max-width:800px;font-weight:600}
+.hero-actions{display:flex;gap:var(--space-md);margin-top:var(--space-xl);flex-wrap:wrap}
+.grid{display:grid;gap:var(--space-lg);margin-bottom:var(--space-xl)}
+.card{background:var(--bg-card);padding:var(--space-xl);border-radius:var(--border-radius-lg);box-shadow:var(--shadow-md);border:2px solid var(--border);height:100%;display:flex;flex-direction:column;transition:transform 0.3s ease,box-shadow 0.3s ease}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card-icon{font-size:3rem;color:var(--secondary);margin-bottom:var(--space-md);display:flex;align-items:center;justify-content:center;width:70px;height:70px;background:var(--bg-secondary);border-radius:50%;flex-shrink:0}
+.card-title{margin-bottom:var(--space-md);color:var(--text-primary);font-size:1.5rem}
+.card-body{color:var(--text-secondary);flex-grow:1;font-size:1.1rem;line-height:1.7}
+.video-container{max-width:800px;margin:0 auto;border-radius:var(--border-radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+.video-container video{width:100%;height:auto;display:block}
+.video-controls{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.7));padding:var(--space-md);display:flex;justify-content:center;gap:var(--space-sm);opacity:0;transition:opacity 0.3s ease}
+.video-container:hover .video-controls{opacity:1}
+.video-controls button{width:44px;height:44px;border-radius:50%;background:var(--secondary);color:var(--text-inverse);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:all 0.3s ease}
+.video-controls button:hover{background:var(--accent);transform:scale(1.1)}
+.platform-badges{display:flex;gap:var(--space-md);flex-wrap:wrap;justify-content:center;margin-top:var(--space-lg)}
+.platform-badge{display:flex;align-items:center;gap:var(--space-xs);padding:var(--space-sm) var(--space-md);background:var(--bg-secondary);border-radius:var(--border-radius);font-size:0.875rem}
+footer{background:var(--primary);color:var(--text-inverse);padding:var(--space-lg) 0;margin-top:auto;text-align:center}
+.footer-title{font-size:2rem;font-weight:900;color:var(--text-inverse)}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg-modal);display:none;justify-content:center;align-items:center;z-index:var(--z-modal);padding:var(--space-md)}
+.modal-container{background:var(--bg-card);border-radius:var(--border-radius-lg);max-width:500px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-md);border:2px solid var(--secondary)}
+.modal-content{padding:var(--space-xl)}
+.modal-title{text-align:center;margin-bottom:var(--space-lg);color:var(--text-primary)}
+.modal-body{margin-bottom:var(--space-xl);line-height:1.8;color:var(--text-secondary);font-size:1.1rem}
+.modal-actions{display:flex;justify-content:center;gap:var(--space-md)}
+.loading-spinner{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg-modal);display:none;justify-content:center;align-items:center;flex-direction:column;z-index:var(--z-modal);color:var(--text-inverse)}
+.spinner{width:60px;height:60px;border:4px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:var(--secondary);margin-bottom:var(--space-lg);animation:spin 1s linear infinite}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.floating-tools{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:var(--space-md);z-index:var(--z-fixed)}
+.tool-btn{width:60px;height:60px;border-radius:50%;background:var(--secondary);color:var(--text-inverse);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:var(--shadow-md);font-weight:bold;transition:all 0.3s ease}
+.tool-btn:hover,.tool-btn:focus-visible{background:var(--accent);transform:scale(1.1)}
+.text-center{text-align:center}
+.text-muted{color:#666666}
+.mt-3{margin-top:var(--space-md)}
+.mt-5{margin-top:var(--space-xl)}
+@media (max-width:768px){:root{--header-height:60px;--space-xl:1.5rem;--space-xxl:2rem}
+.hamburger{display:flex}
+.nav-menu{position:fixed;top:var(--header-height);left:0;width:100%;background:var(--bg-card);flex-direction:column;padding:var(--space-md);box-shadow:var(--shadow-md);transform:translateY(-100%);opacity:0;visibility:hidden;z-index:1000;max-height:calc(100vh - var(--header-height));overflow-y:auto;transition:transform 0.3s ease,opacity 0.3s ease,visibility 0.3s ease}
+.nav-menu.active{transform:translateY(0);opacity:1;visibility:visible}
+.hero h2{font-size:2.5rem}
+.hero-actions{flex-direction:column}
+.hero-actions .btn{width:100%}
+.grid{grid-template-columns:1fr}
+.floating-tools{bottom:15px;right:15px}
+.tool-btn{width:55px;height:55px}}
+@media (max-width:480px){h1{font-size:2.5rem}h2{font-size:2rem}h3{font-size:1.75rem}
+.container{padding:0 var(--space-md)}
+.section{padding:var(--space-xl) 0}
+.btn{padding:0.875rem 1.75rem;font-size:1rem}
+.modal-container{margin:var(--space-md)}}
+@media (min-width:769px){.grid-cols-2{grid-template-columns:repeat(2,1fr)}
+.grid-cols-3{grid-template-columns:repeat(3,1fr)}
+.grid-cols-4{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:640px){.grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}}
+img{draggable:false;-webkit-user-drag:none}
+</style>
 </head>
 <body>
-    <div class="particles" id="particles-container"></div>
-
-    <header id="main-header">
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo-container">
-                    <div class="logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="45" fill="#0052CC"/>
-                            <text x="50" y="68" font-size="50" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold">K</text>
-                        </svg>
-                    </div>
-                    <div class="logo-text">KOO<span>APP</span></div>
-                </div>
-                <button class="hamburger" aria-label="Menú de navegación">☰</button>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link active">Inicio</a></li>
-                    <li><a href="#presentation" class="nav-link">Plataforma</a></li>
-                    <li><a href="#features" class="nav-link">Características</a></li>
-                    <li><a href="#download" class="nav-link">Descargar</a></li>
-                    <li><a href="#contact" class="nav-link btn-contact">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section id="home" class="hero section">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>KOO-APP</h2>
-                    <p class="lead">Adquiere nuestro servicio desde tu móvil de forma segura y sencilla</p>
-                    
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">???</span>
-                            <span class="stat-label">Usuarios</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">94%</span>
-                            <span class="stat-label">Satisfacción</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">12/5</span>
-                            <span class="stat-label">Soporte</span>
-                        </div>
-                    </div>
-
-                    <div class="hero-actions">
-                        <a href="#download" class="btn btn-large">Descargar App</a>
-                        <a href="#features" class="btn btn-large btn-secondary">Ver Características</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="presentation" class="section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Imágenes de la Plataforma</h2>
-                    <p class="subtitle">Descubre la interfaz de KOO-APP</p>
-                </div>
-                
-                <div class="screenshots-container">
-                    <figure class="screenshot-frame">
-                        <img 
-                            src="https://github.com/KOOWEXA/koo-app/raw/main/1.jpg"
-                            alt="Interfaz principal de KOO-APP"
-                            class="screenshot-img"
-                            loading="lazy"
-                            width="1080"
-                            height="1920"
-                        >
-                        <figcaption class="sr-only">Interfaz principal</figcaption>
-                    </figure>
-                    <figure class="screenshot-frame">
-                        <img 
-                            src="https://github.com/KOOWEXA/koo-app/raw/main/2.jpg"
-                            alt="Menú de planes de KOO-APP"
-                            class="screenshot-img"
-                            loading="lazy"
-                            width="1080"
-                            height="1920"
-                        >
-                        <figcaption class="sr-only">Menú de planes</figcaption>
-                    </figure>
-                    <figure class="screenshot-frame">
-                        <img 
-                            src="https://github.com/KOOWEXA/koo-app/raw/main/3.jpg"
-                            alt="Gestión de servicios en KOO-APP"
-                            class="screenshot-img"
-                            loading="lazy"
-                            width="1080"
-                            height="1920"
-                        >
-                        <figcaption class="sr-only">Gestión de servicios</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Características Principales</h2>
-                    <p class="subtitle">Descubre por qué KOO-APP es la mejor opción para ti</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="info-card">
-                        <div class="info-icon">📴</div>
-                        <h4>Offline</h4>
-                        <p>Navega por nuestra aplicación sin necesidad de conexión a internet.</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">✅</div>
-                        <h4>Facilidad</h4>
-                        <p>Gestiona y adquiere cualquiera de nuestros planes con mayor simplicidad.</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">⚡</div>
-                        <h4>Rápida</h4>
-                        <p>Optimizada para una experiencia rápida y fluida en todos los dispositivos.</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon">🛡️</div>
-                        <h4>Segura</h4>
-                        <p>Protección de datos y transacciones seguras encriptadas.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="download" class="section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Descarga KOO-APP</h2>
-                    <p class="subtitle">Disponible para dispositivos Android</p>
-                </div>
-                
-                <div class="download-content">
-                    <a href="https://github.com/KOOWEXA/koo-app/raw/refs/heads/main/KOO-APP.apk" 
-                       class="btn btn-large btn-accent" 
-                       download="KOO-APP.apk"
-                       aria-label="Descargar KOO-APP para Android">
-                        <span>Descargar para Android</span>
-                        <span>⬇️</span>
-                    </a>
-                    
-                    <div class="platform-badges">
-                        <div class="platform-badge">
-                            <span>📱</span>
-                            <span>Android 4.4+</span>
-                        </div>
-                        <div class="platform-badge">
-                            <span>📦</span>
-                            <span>APK Directo</span>
-                        </div>
-                        <div class="platform-badge">
-                            <span>🔒</span>
-                            <span>Sin Virus</span>
-                        </div>
-                    </div>
-                    
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: var(--space-lg);">
-                        Versión 2.8.0abc• Sin anuncios • Verificado
-                    </p>
-                    
-                    <p style="margin-top: var(--space-md); font-size: 0.85rem; color: var(--text-secondary);">
-                        Permite instalación desde fuentes desconocidas en ajustes de seguridad
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <div class="logo">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                                <circle cx="50" cy="50" r="45" fill="#4DABF7"/>
-                                <text x="50" y="68" font-size="50" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold">K</text>
-                            </svg>
-                        </div>
-                        <div class="footer-logo-text">KOO<span>APP</span></div>
-                    </div>
-                    <p class="footer-description">
-                        Plataforma líder en servicios móviles.
-                    </p>
-                
-                <div class="footer-app">
-                    <h4>Descarga la App</h4>
-                    <p>Obtén KOO-APP en tu dispositivo Android</p>
-                    <a href="https://github.com/KOOWEXA/koo-app/raw/refs/heads/main/KOO_2.06.apk" class="app-download" download="KOO-APP.apk">
-                        <span>Descargar Ahora</span>
-                        <span>⬇️</span>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 - 2026 KOO-APP. Todos los derechos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div class="floating-tools">
-        <button class="tool-btn" aria-label="Instalar aplicación" id="pwa-install">📲</button>
-        <button class="tool-btn" aria-label="Ir arriba" id="scroll-top">↑</button>
-    </div>
-
-    <div class="modal" id="contact-modal">
-        <div class="modal-container">
-            <div class="modal-content">
-                <div class="modal-icon">✉️</div>
-                <h3 class="modal-title">Contacto</h3>
-                <div class="modal-body">
-                    <p>Para contactar con soporte, envía un correo a: <strong>soporte@kooapp.com</strong></p>
-                    <p>O llama al: <strong>+1 234 567 890</strong></p>
-                </div>
-                <div class="modal-actions">
-                    <button class="btn btn-secondary" id="close-modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="loading-spinner" id="loading">
-        <div class="spinner"></div>
-        <p>Cargando...</p>
-    </div>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "KOO-APP",
-        "description": "Adquiere servicios desde tu móvil de forma segura y sencilla",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Android",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "KOO-APP"
-        }
-    }
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const header = document.getElementById('main-header');
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contactBtn = document.querySelector('.btn-contact');
-            const contactModal = document.getElementById('contact-modal');
-            const closeModal = document.getElementById('close-modal');
-            const loadingSpinner = document.getElementById('loading');
-            const scrollTopBtn = document.getElementById('scroll-top');
-            const pwaInstallBtn = document.getElementById('pwa-install');
-            let lastScroll = 0;
-
-            function toggleMenu() {
-                hamburger.textContent = navMenu.classList.contains('active') ? '☰' : '✕';
-                navMenu.classList.toggle('active');
-            }
-
-            hamburger.addEventListener('click', toggleMenu);
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    hamburger.textContent = '☰';
-                });
-            });
-
-            window.addEventListener('scroll', () => {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > 100) {
-                    if (currentScroll > lastScroll && currentScroll > header.offsetHeight) {
-                        header.style.transform = 'translateY(-100%)';
-                    } else {
-                        header.style.transform = 'translateY(0)';
-                    }
-                } else {
-                    header.style.transform = 'translateY(0)';
-                }
-                
-                scrollTopBtn.style.display = currentScroll > 300 ? 'flex' : 'none';
-                lastScroll = currentScroll;
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        const headerHeight = header.offsetHeight;
-                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            if (contactBtn && contactModal) {
-                contactBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    contactModal.style.display = 'flex';
-                });
-            }
-
-            if (closeModal) {
-                closeModal.addEventListener('click', () => {
-                    contactModal.style.display = 'none';
-                });
-            }
-
-            if (contactModal) {
-                contactModal.addEventListener('click', (e) => {
-                    if (e.target === contactModal) {
-                        contactModal.style.display = 'none';
-                    }
-                });
-            }
-
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', () => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                });
-            }
-
-            window.addEventListener('load', () => {
-                if (loadingSpinner) {
-                    loadingSpinner.style.display = 'none';
-                }
-            });
-
-            if (loadingSpinner) {
-                setTimeout(() => {
-                    loadingSpinner.style.display = 'none';
-                }, 1000);
-            }
-
-            let deferredPrompt;
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                if (pwaInstallBtn) {
-                    pwaInstallBtn.style.display = 'flex';
-                }
-            });
-
-            if (pwaInstallBtn) {
-                pwaInstallBtn.addEventListener('click', async () => {
-                    if (deferredPrompt) {
-                        deferredPrompt.prompt();
-                        const { outcome } = await deferredPrompt.userChoice;
-                        if (outcome === 'accepted') {
-                            pwaInstallBtn.style.display = 'none';
-                        }
-                        deferredPrompt = null;
-                    }
-                });
-            }
-
-            window.addEventListener('appinstalled', () => {
-                if (pwaInstallBtn) {
-                    pwaInstallBtn.style.display = 'none';
-                }
-            });
-
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            document.addEventListener('keydown', e => {
-                if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) e.preventDefault();
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) e.preventDefault();
-            });
-
-            document.addEventListener('dragstart', e => {
-                if (e.target.tagName === 'IMG' || e.target.tagName === 'A') e.preventDefault();
-            });
-
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('data:application/javascript,' + encodeURIComponent(`
-                    self.addEventListener('install', event => {
-                        self.skipWaiting();
-                    });
-                    self.addEventListener('activate', event => {
-                        event.waitUntil(clients.claim());
-                    });
-                    self.addEventListener('fetch', event => {
-                        event.respondWith(
-                            caches.match(event.request)
-                                .then(response => response || fetch(event.request))
-                        );
-                    });
-                `)).catch(() => {});
-            }
-
-            const sitemapLinks = [
-                '#home',
-                '#presentation',
-                '#features',
-                '#download'
-            ];
-            
-            const sitemapData = {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                "url": window.location.href,
-                "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": window.location.href + "?q={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                }
-            };
-            
-            const sitemapScript = document.createElement('script');
-            sitemapScript.type = 'application/ld+json';
-            sitemapScript.textContent = JSON.stringify(sitemapData);
-            document.head.appendChild(sitemapScript);
-        });
-    </script>
+<div id="particles-container"></div>
+<header id="main-header">
+<div class="container">
+<nav class="navbar">
+<div class="logo-container">
+<div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#0052CC"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="#FFFFFF" font-family="Arial, sans-serif" font-weight="bold">K</text></svg></div>
+<div class="logo-text">KOO<span>APP</span></div>
+</div>
+<button class="hamburger" aria-label="Menú de navegación">☰</button>
+<ul class="nav-menu">
+<li><a href="#home" class="nav-link active">Inicio</a></li>
+<li><a href="#presentation" class="nav-link">Plataforma</a></li>
+<li><a href="#features" class="nav-link">Características</a></li>
+<li><a href="#download" class="nav-link">Descargar</a></li>
+<li><a href="#contact" class="nav-link btn btn-small">Contacto</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main>
+<section id="home" class="hero section">
+<div class="container">
+<div class="hero-content">
+<h2>KOO-APP</h2>
+<p class="lead">Adquiere nuestro servicio desde tu móvil de forma segura y sencilla</p>
+<div class="hero-actions">
+<a href="#download" class="btn btn-large">Descargar App</a>
+<a href="#features" class="btn btn-large btn-secondary">Ver Características</a>
+</div>
+</div>
+</div>
+</section>
+<section id="presentation" class="section">
+<div class="container">
+<div class="section-title">
+<h2>Video de Presentación</h2>
+<p class="subtitle">Conoce KOO-APP en acción</p>
+</div>
+<div class="video-container">
+<video id="intro-video" autoplay muted playsinline>
+<source src="https://github.com/KOOWEXA/koo-app/raw/refs/heads/main/intro.mp4" type="video/mp4">
+Tu navegador no soporta la reproducción de video.
+</video>
+<div class="video-controls">
+<button id="play-pause" aria-label="Reproducir/Pausar">▶️</button>
+<button id="mute-unmute" aria-label="Silenciar/Activar sonido">🔇</button>
+<button id="fullscreen" aria-label="Pantalla completa">⛶</button>
+</div>
+</div>
+</div>
+</section>
+<section id="features" class="section">
+<div class="container">
+<div class="section-title">
+<h2>Características Principales</h2>
+<p class="subtitle">Descubre por qué KOO-APP es la mejor opción para ti</p>
+</div>
+<div class="grid">
+<div class="card">
+<div class="card-icon">📴</div>
+<h4 class="card-title">Offline</h4>
+<p class="card-body">Navega por nuestra aplicación sin necesidad de conexión a internet.</p>
+</div>
+<div class="card">
+<div class="card-icon">✅</div>
+<h4 class="card-title">Facilidad</h4>
+<p class="card-body">Gestiona y adquiere cualquiera de nuestros planes con mayor simplicidad.</p>
+</div>
+<div class="card">
+<div class="card-icon">⚡</div>
+<h4 class="card-title">Rápida</h4>
+<p class="card-body">Optimizada para una experiencia rápida y fluida en todos los dispositivos.</p>
+</div>
+<div class="card">
+<div class="card-icon">🛡️</div>
+<h4 class="card-title">Segura</h4>
+<p class="card-body">Protección de datos y transacciones seguras encriptadas.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="download" class="section">
+<div class="container">
+<div class="section-title">
+<h2>Descarga KOO-APP</h2>
+<p class="subtitle">Disponible para dispositivos Android</p>
+</div>
+<div class="download-content text-center">
+<a href="https://github.com/KOOWEXA/koo-app/raw/refs/heads/main/KOO-APP.apk" class="btn btn-large btn-accent" download="KOO-APP.apk" aria-label="Descargar KOO-APP para Android"><span>Descargar para Android</span><span>⬇️</span></a>
+<div class="platform-badges">
+<div class="platform-badge"><span>📱</span><span>Android 4.4+</span></div>
+<div class="platform-badge"><span>📦</span><span>APK Directo</span></div>
+<div class="platform-badge"><span>🔒</span><span>Sin Virus</span></div>
+</div>
+<p class="text-muted mt-5" style="font-size:0.9rem">Versión 2.8.0abc• Sin anuncios • Verificado</p>
+<p class="text-muted mt-3" style="font-size:0.85rem">Permite instalación desde fuentes desconocidas en ajustes de seguridad</p>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container">
+<h2 class="footer-title">KOO-APP</h2>
+</div>
+</footer>
+<div class="floating-tools">
+<button class="tool-btn" aria-label="Instalar aplicación" id="pwa-install">📲</button>
+<button class="tool-btn" aria-label="Ir arriba" id="scroll-top">↑</button>
+</div>
+<div class="modal" id="contact-modal">
+<div class="modal-container">
+<div class="modal-content">
+<div class="modal-title">Contacto</div>
+<div class="modal-body">
+<p>Para contactar con soporte, envía un correo a: <strong>koowexa@gmail.com</strong></p>
+</div>
+<div class="modal-actions">
+<button class="btn btn-secondary" id="close-modal">Cerrar</button>
+</div>
+</div>
+</div>
+</div>
+<div class="loading-spinner" id="loading">
+<div class="spinner"></div>
+<p>Cargando...</p>
+</div>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"KOO-APP","description":"Adquiere servicios desde tu móvil de forma segura y sencilla","applicationCategory":"BusinessApplication","operatingSystem":"Android","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@type":"Organization","name":"KOO-APP"}}</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+const header=document.getElementById('main-header'),hamburger=document.querySelector('.hamburger'),navMenu=document.querySelector('.nav-menu'),navLinks=document.querySelectorAll('.nav-link'),contactBtn=document.querySelector('.nav-link.btn'),contactModal=document.getElementById('contact-modal'),closeModal=document.getElementById('close-modal'),loading=document.getElementById('loading'),scrollTop=document.getElementById('scroll-top'),pwaInstall=document.getElementById('pwa-install'),video=document.getElementById('intro-video'),playPauseBtn=document.getElementById('play-pause'),muteBtn=document.getElementById('mute-unmute'),fullscreenBtn=document.getElementById('fullscreen');
+function toggleMenu(){hamburger.textContent=navMenu.classList.contains('active')?'☰':'✕';navMenu.classList.toggle('active')}
+hamburger.addEventListener('click',toggleMenu);
+navLinks.forEach(link=>{link.addEventListener('click',()=>{navMenu.classList.remove('active');hamburger.textContent='☰'})});
+let lastScroll=0;
+window.addEventListener('scroll',()=>{const currentScroll=window.pageYOffset;if(currentScroll>100){if(currentScroll>lastScroll&&currentScroll>header.offsetHeight){header.style.transform='translateY(-100%)'}else{header.style.transform='translateY(0)'}}else{header.style.transform='translateY(0)'}
+scrollTop.style.display=currentScroll>300?'flex':'none';lastScroll=currentScroll});
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();const targetId=this.getAttribute('href');if(targetId==='#')return;const targetElement=document.querySelector(targetId);if(targetElement){const headerHeight=header.offsetHeight;const targetPosition=targetElement.getBoundingClientRect().top+window.pageYOffset-headerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'})}})});
+if(contactBtn&&contactModal){contactBtn.addEventListener('click',e=>{e.preventDefault();contactModal.style.display='flex'})}
+if(closeModal){closeModal.addEventListener('click',()=>{contactModal.style.display='none'})}
+if(contactModal){contactModal.addEventListener('click',e=>{if(e.target===contactModal){contactModal.style.display='none'}})}
+if(scrollTop){scrollTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})})}
+window.addEventListener('load',()=>{if(loading){loading.style.display='none'}});
+if(loading){setTimeout(()=>{loading.style.display='none'},1000)}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;if(pwaInstall){pwaInstall.style.display='flex'}});
+if(pwaInstall){pwaInstall.addEventListener('click',async()=>{if(deferredPrompt){await deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==='accepted'){pwaInstall.style.display='none'}
+deferredPrompt=null}})}
+window.addEventListener('appinstalled',()=>{if(pwaInstall){pwaInstall.style.display='none'}});
+if(video&&playPauseBtn&&muteBtn&&fullscreenBtn){
+function updatePlayPauseButton(){playPauseBtn.textContent=video.paused?'▶️':'⏸️'}
+function updateMuteButton(){muteBtn.textContent=video.muted?'🔇':'🔊'}
+video.addEventListener('play',updatePlayPauseButton);
+video.addEventListener('pause',updatePlayPauseButton);
+video.addEventListener('volumechange',updateMuteButton);
+playPauseBtn.addEventListener('click',()=>{if(video.paused){video.play().catch(()=>{})}else{video.pause()}});
+muteBtn.addEventListener('click',()=>{video.muted=!video.muted});
+fullscreenBtn.addEventListener('click',()=>{if(video.requestFullscreen){video.requestFullscreen()}else if(video.webkitRequestFullscreen){video.webkitRequestFullscreen()}else if(video.msRequestFullscreen){video.msRequestFullscreen()}});
+video.addEventListener('click',()=>{if(video.paused){video.play().catch(()=>{})}else{video.pause()}});
+video.addEventListener('ended',()=>{video.currentTime=0;setTimeout(()=>{video.play().catch(()=>{})},1000)});
+updatePlayPauseButton();
+updateMuteButton()}
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&['u','U','s','S'].includes(e.key)||e.key==='F12'||e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(e.key)){e.preventDefault();return false}});
+document.addEventListener('dragstart',e=>{if(e.target.tagName==='IMG'||e.target.tagName==='A'){e.preventDefault();return false}});
+if('serviceWorker'in navigator){navigator.serviceWorker.register('data:application/javascript,'+encodeURIComponent(`self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(clients.claim())});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(response=>response||fetch(e.request)))})`)).catch(()=>{})}
+});
+</script>
 </body>
 </html>
